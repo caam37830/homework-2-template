@@ -4,6 +4,12 @@ In this homework, you'll practice some basic tools you'll use throughout the cou
 
 Please put any written answers in [`answers.md`](answers.md)
 
+Reminder: you can embed images in markdown.  If you are asked to make a plot, save it as a `png` file, commit it to git, and embed it in this file.
+
+Please put functions and class definitions in [`matlib.py`](matlib.py)
+
+Please put your code to generate plots, run experiments etc. [`script.py`](script.py).
+
 You may need to use conda to install `tqdm` to run the starter code for problem 4.  You can run
 ```
 conda install --file requirements.txt
@@ -13,17 +19,7 @@ to install the packages in [`requirements.txt`](requirements.txt)
 ## Important Information
 
 ### Due Date
-This assignment is due Friday, October 9 at 12pm (noon) Chicago time.
-
-### Git
-You will need to use basic `git` in this assignment.  See [this tutorial](https://github.com/caam37830/git-tutorial) if you have never used it before.  The basic commands to know are:
-* `git clone`
-* `git pull`
-* `git add`
-* `git commit`
-* `git push`
-
-
+This assignment is due Friday, October 23 at 12pm (noon) Chicago time.
 
 ### Grading Rubric
 
@@ -31,12 +27,9 @@ The following rubric will be used for grading.
 
 |   | Autograder | Correctness | Style | Total |
 |:-:|:-:|:-:|:-:|:-:|
-| Survey    |   | /10 | /0 |  /10 |
-| Problem 0 |   | /8  | /2  |  /10 |
-| Problem 1 | /5 | /10  | /5  | /20 |
-| Problem 2 | /10 | /12  | /3  | /25 |
-| Problem 3 | /5 | /12  | /3  | /20 |
-| Problem 4 |   |  /10 | /5  | /15 |
+| Problem 0 |  |   |  | /25 |
+| Problem 1 |  |   |  | /55 |
+| Problem 2 |  |   |  | /20 |
 
 Correctness will be based on code (i.e. did you provide was was aksed for) and the content of [`answers.md`](answers.md).
 
