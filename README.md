@@ -6,9 +6,9 @@ Please put any written answers in [`answers.md`](answers.md)
 
 Reminder: you can embed images in markdown.  If you are asked to make a plot, save it as a `png` file, commit it to git, and embed it in this file.
 
-Please put functions and class definitions in [`matlib.py`](matlib.py)
+Please put functions and class definitions in [`matlib.py`](matlib.py).  This file should contain a Python *module*.
 
-Please put your code to generate plots, run experiments etc. in [`script.py`](script.py).
+Please put your code to generate plots, run experiments etc. in [`script.py`](script.py).  This file is a Python *script*.
 
 You can run
 ```
