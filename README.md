@@ -1,7 +1,5 @@
 # Homework 2 - Dense Linear Algebra
 
-In this homework, you'll practice some basic tools you'll use throughout the course.
-
 Please put any written answers in [`answers.md`](answers.md)
 
 Reminder: you can embed images in markdown.  If you are asked to make a plot, save it as a `png` file, commit it to git, and embed it in this file.
