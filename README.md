@@ -92,7 +92,7 @@ Both factorizations take O(n^3) time to compute - which is faster in practice?
 
 One example of a matrix function is the matrix power `A**n`.  In Homework 0, you computed this using a version of the Egyptian algorithm.
 
-If `A` is symmetric, recall `A` has an eigenvalue `A = Q @ L @ Q.T`, where `Q` is orthogonal, which can be computed with `eigh`.  Then we can write the power
+If `A` is symmetric, recall `A` has an eigenvalue decomposition `A = Q @ L @ Q.T`, where `Q` is orthogonal, which can be computed with `eigh`.  Then we can write the power
 
 `A**n = A @ A @ ... @ A`
 
