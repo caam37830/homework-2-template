@@ -54,6 +54,8 @@ The tests are in [`test.py`](test.py).  You do not need to modify (or understand
 
 You need to pass all tests to receive full points.
 
+Please enable GitHub Actions on your repository (if it isn't already) - this will cause the autograder to run automatically every time you push a commit to GitHub, and you can get quick feedback.
+
 
 ## Problem 0 - Matrix Factorizations (25 points)
 
