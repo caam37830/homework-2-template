@@ -152,7 +152,7 @@ Write 6 functions: `matmul_***` where `***` is replaced by each option above.  F
 Compare the time it takes to run each of the 6 versions of `matmul_***` above with BLAS dgemm (called through SciPy) and NumPy `matmul`.  (Remember to precompile your JIT functions before timing).
 Use random `n x n` matrices for `B` and `C`, i.e. `p = q = r = n`.  Use row-major `ndarray`s in NumPy.
 
-Make a log-log plot of the runtimes of the 9 functions, for 10 values of `n` logarithmically spaced between 100 and 4000.  Include a legend, axis labels, and a plot title.
+Make a log-log plot of the runtimes of the 8 functions, for 10 values of `n` logarithmically spaced between 100 and 4000.  Include a legend, axis labels, and a plot title.
 
 All of these implementations have an O(n**3) asymptotic run time, and perform an identical number of floating point operations.  Give an explanation for why some loop orders are faster than others - why is the fastest version fastest?  Why is the slowest version slowest?
 
