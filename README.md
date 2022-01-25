@@ -17,7 +17,7 @@ to install the packages in [`requirements.txt`](requirements.txt)
 ## Important Information
 
 ### Due Date
-This assignment is due Friday, October 23 at 12pm (noon) Chicago time.
+This assignment is due Wednesday, February 2 at 1:30pm Chicago time.
 
 ### Grading Rubric
 
@@ -29,7 +29,7 @@ The following rubric will be used for grading.
 | Part A | /2 | /2 | /1 | /5 |
 | Part B |  | /3 | /2 | /5 |
 | Part C | /3 | /5 | /2 | /10 |
-| Part D | /2 | /5 | /2 | /5 |
+| Part D | /1 | /3 | /1 | /5 |
 | Problem 1 |  |   |  | /55 |
 | Part A | /12 | /15 | /3 | /30 |
 | Part B | /3 | /10 | /2 | /15 |
@@ -54,7 +54,7 @@ The tests are in [`test.py`](test.py).  You do not need to modify (or understand
 
 You need to pass all tests to receive full points.
 
-Please enable GitHub Actions on your repository (if it isn't already) - this will cause the autograder to run automatically every time you push a commit to GitHub, and you can get quick feedback.
+Please enable GitHub Actions on your repository (if it isn't already) - this will cause the autograder to run automatically every time you push a commit to GitHub, and you can get quick feedback. However, GitHub actions has a time limit associated. If running pytest and script.py takes more than 30 minutes, it will time out. Make sure to follow the instructions in the assignment to use numba appropriately so that your code runs in a reasonable amount of time.
 
 
 ## Problem 0 - Matrix Factorizations (25 points)
@@ -70,21 +70,21 @@ A matrix is symmetric positive-definite (SPD) if
 An easy way to generate a random SPD matrix is:
 ```python
 A = np.random.randn(m,n) # n >= m
-A = A * A.T # use * not + for SPD!
+A = A @ A.T # use @ not + for SPD!
 ```
 
-The Cholesky factorization of a SPD matrix `A` is `A = L * L.T` where `L` is lower triangular.  Alternatively, we might say `A = U.T * U` where `U` is `L.T`.  This is a variant of the LU decomposition, where we can use symmetry in `A`.
+The Cholesky factorization of a SPD matrix `A` is `A = L @ L.T` where `L` is lower triangular.  Alternatively, we might say `A = U.T @ U` where `U` is `L.T`.  This is a variant of the LU decomposition, where we can use symmetry in `A`.
 
 
 ### Part A (5 points)
 
-Write a function `solve_chol` which solves a linear system using the Cholesky decomposition.  Explicitly, `x = solve_chol(A, b)` should (numerically) satisfy `A * x = b`.  You can assume that `A` is SPD.
+Write a function `solve_chol` which solves a linear system using the Cholesky decomposition.  Explicitly, `x = solve_chol(A, b)` should (numerically) satisfy `A @ x = b`.  You can assume that `A` is SPD.
 
 Use [`cholesky`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cholesky.html#scipy.linalg.cholesky) in `scipy.linalg` to compute the decomposition.
 
 ### Part B (5 points)
 
-Create a log-log plot of the time it takes to compute the Cholesky decomposition vs. the LU decomposition of random n x n SPD matrices.  Compute times for 10 values of `n` logarithmically spaced between `n=10` and `n=4000`. (use `np.logspace` and `np.round`).  Make sure to give your plot axes labels, a legend, and a title.
+Create a log-log plot of the time it takes to compute the Cholesky decomposition vs. the LU decomposition of random n x n SPD matrices.  Compute times for 10 values of `n` logarithmically spaced between `n=10` and `n=2000`. (use `np.logspace` and `np.round`).  Make sure to give your plot axes labels, a legend, and a title.
 
 Both factorizations take O(n^3) time to compute - which is faster in practice?
 
@@ -102,7 +102,7 @@ as
 
 Because `Q.T @ Q = I` (the identity), this becomes
 
-`A**n = Q * (L**n) * Q.T`
+`A**n = Q @ (L**n) @ Q.T`
 
 Recall that `L` is diagonal, so `L**n` can be computed element-wise.
 
@@ -152,7 +152,7 @@ Write 6 functions: `matmul_***` where `***` is replaced by each option above.  F
 Compare the time it takes to run each of the 6 versions of `matmul_***` above with BLAS dgemm (called through SciPy) and NumPy `matmul`.  (Remember to precompile your JIT functions before timing).
 Use random `n x n` matrices for `B` and `C`, i.e. `p = q = r = n`.  Use row-major `ndarray`s in NumPy.
 
-Make a log-log plot of the runtimes of the 8 functions, for 10 values of `n` logarithmically spaced between 100 and 4000.  Include a legend, axis labels, and a plot title.
+Make a log-log plot of the runtimes of the 8 functions, for 10 values of `n` logarithmically spaced between 100 and 2000.  Include a legend, axis labels, and a plot title.
 
 All of these implementations have an O(n**3) asymptotic run time, and perform an identical number of floating point operations.  Give an explanation for why some loop orders are faster than others - why is the fastest version fastest?  Why is the slowest version slowest?
 
@@ -173,7 +173,7 @@ Write a function `matmul_blocked`, where `A = matmul_blocked(B, C)` is equivalen
 
 This function should be defined recursively, where the block multiplication also uses `matmul_blocked`, unless `n <= 64`, in which case, you can just use the best version of `matmul_***` from part A.  Use Numba to make this function JIT compile.
 
-Compare the run time of this algorithm to the best version of `matmul_***` you wrote in part A.  Make a plot like you did in part A comparing the run times of these two functions for values of `n` in `[2**i for i in range(6,13)] `
+Compare the run time of this algorithm to the best version of `matmul_***` you wrote in part A.  Make a plot like you did in part A comparing the run times of these two functions for values of `n` in `[2**i for i in range(6,12)] `
 
 Hint: one possible way to loop over all slices is to use a `slice` object in Python.  E.g.
 ```python
@@ -222,7 +222,7 @@ A[s2, s2] = M1 - M2 + M3 + M6
 
 Yes, this is a bit of an exercise to verify (you can if you want to, but don't need anything in `answers.md`).  You can essentially just replace `@` with the appropriate function call in the above to write the algorithm (and implement the rest of the function).
 
-Create a loglog plot of run times for `n` in `[2**i for i in range(6,13)]`.  Compare `matmul_strassen` to `matmul_blocked`. Add a legend, axis labels, and title.
+Create a loglog plot of run times for `n` in `[2**i for i in range(6,12)]`.  Compare `matmul_strassen` to `matmul_blocked`. Add a legend, axis labels, and title.
 
 Does Strassen's algorithm actually beat blocked matrix multiplication for the values of `n` that you tested?
 
@@ -239,10 +239,10 @@ We'll consider discrete positions on the sidewalk.  We'll say there are `n` posi
 
 The drunkard's position at time `t` is only dependent on their position at time `t-1`.  Because they are making random movements, their position is a random variable `p`.  `p` can be expressed as a vector, where `p[i|t]` is the probability that the person is at position `i` at time `t`.  To get to time `t` from time `t-1`, we can compute `p[i|t] = 0.5 * p[i-1|t-1] + 0.5 * p[i+1|t-1]` (with necessary modifications for endpoints).
 
-Another way to state this is that we can get the vector `p` at time `t` from the vector `p` at time `t-1` by calculating the product `A * p[:|t-1]`, where `A` is an `n x n` matrix, with the `i`th column of `A` has `0.5` in row `i+1`, `0.5` in row `i-1`, and `0` in all other entries (this encodes the probabilities of where the person can end up from state `i`).
+Another way to state this is that we can get the vector `p` at time `t` from the vector `p` at time `t-1` by calculating the product `A @ p[:|t-1]`, where `A` is an `n x n` matrix, with the `i`th column of `A` has `0.5` in row `i+1`, `0.5` in row `i-1`, and `0` in all other entries (this encodes the probabilities of where the person can end up from state `i`).
 
 1. Write a function `markov_matrix(n)` which returns the matrix `A` above for the random walk on the sidewalk of length `n`.  Make the necessary modifications for the endpoints of the sidewalk.
-2. Run a simulation where the person starts at `i=0` at time `t=0` on a sidewalk of length `n=50` (i.e. `p` at time 0 is a vector of length 50 with `p[0] = 1` and 0 everywhere else).  Plot the vector `p` for `t in (10, 100, 1000)`.  Give your plot labels and a title.
+2. Run a simulation where the person starts at `i=0` at time `t=0` on a sidewalk of length `n=50` (i.e. `p` at time 0 is a vector of length 50 with `p[0] = 1` and 0 everywhere else).   Plot the probability distribution of where the walker will be at times `t in (10, 100, 1000)`. In other words, plot the vector `p` for `t in (10, 100, 1000)`.  Give your plot labels and a title.
 3. Calculate the eigenvector with largest eigenvalue of the matrix `A`.  Normalize the vector so its entries sum to 1. (e.g. `v = v / np.sum(v)`). How close is this to `p` at `t=1000` in part 2 (give the euclidean distance between the two vectors?)  How close is this to `p` at `t=2000`?
 
 
